@@ -1,0 +1,18 @@
+.container{
+    border: 1px solid grey;
+    padding: 10px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.text{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
