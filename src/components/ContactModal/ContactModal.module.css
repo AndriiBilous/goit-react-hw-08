@@ -1,0 +1,26 @@
+.container {
+    background-color: #ffce33;
+    height: 150px;
+    padding: 15px;
+    position: relative;
+}
+.btnImage {
+    position: absolute;
+    right: 10px;
+    border: transparent;
+    background-color: transparent;
+}
+
+.title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.wrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.btn {
+    width: 100px;
+    padding: 10px;
+}

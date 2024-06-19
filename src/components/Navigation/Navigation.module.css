@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.link {
+    color: black;
+    font-weight: 700;
+    font-size: 24px;
+}
+.active {
+    color: white;
+}

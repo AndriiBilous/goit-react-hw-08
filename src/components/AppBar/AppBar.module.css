@@ -1,0 +1,19 @@
+.header {
+    height: 90px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.container {
+    width: 1200px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}
+.wrap {
+    display: flex;
+    justify-content: space-between;
+}

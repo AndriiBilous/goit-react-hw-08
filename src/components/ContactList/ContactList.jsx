@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
-import { selectFilteredContacts } from '..//../redux/contactsSlice';
+import { selectFilteredContacts } from '..//../redux/contacts/contactsSlice';
 
-function ContactList() {
+function ContactList({ modalOpen, openModal, afterOpenModal }) {
     const contacts = useSelector(selectFilteredContacts);
 
     return (
@@ -11,7 +11,12 @@ function ContactList() {
             {contacts.map(item => {
                 return (
                     <li key={item.id}>
-                        <Contact items={item} />
+                        <Contact
+                            modalOpen={modalOpen}
+                            afterOpenModal={afterOpenModal}
+                            openModal={openModal}
+                            items={item}
+                        />
                     </li>
                 );
             })}

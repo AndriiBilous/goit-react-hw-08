@@ -1,8 +1,10 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import css from './ContactForm.module.css';
-import { addContact } from '..//../redux/contactsOps';
+import { addContact } from '..//../redux/contacts/contactsOps';
+const notify = () => toast.success('You add a new contact');
 
 let ContactSchema = yup.object().shape({
     name: yup.string().required('Required').min(3, 'To short').max(50),
@@ -14,16 +16,17 @@ let ContactSchema = yup.object().shape({
 function ContactForm() {
     const dispatch = useDispatch();
     //======================AddContact========================================
-    const handelAdd = value => {
-        dispatch(addContact(value));
+    const handelAdd = (value, actions) => {
+        if (value !== '') {
+            notify();
+            dispatch(addContact(value));
+        }
+        actions.resetForm();
     };
     return (
         <Formik
             initialValues={{ name: '', number: '' }}
-            onSubmit={(value, actions) => {
-                handelAdd({ ...value });
-                actions.resetForm();
-            }}
+            onSubmit={handelAdd}
             validationSchema={ContactSchema}
         >
             <Form className={css.container}>
@@ -54,6 +57,7 @@ function ContactForm() {
                 <button className={css.btn} type="submit">
                     Add contact
                 </button>
+                <Toaster position="top-center" reverseOrder={false} />
             </Form>
         </Formik>
     );

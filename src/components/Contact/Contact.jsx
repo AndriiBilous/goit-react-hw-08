@@ -1,17 +1,20 @@
-import { useDispatch } from 'react-redux';
 import { AiFillPhone } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 import css from './Contact.module.css';
-import { deleteContact } from '..//../redux/contactsOps';
 
-function Contact({ items: { id, name, number } }) {
-    const dispatch = useDispatch();
-
-    //======================Delete========================================
-    const onDelete = contactId => {
-        dispatch(deleteContact(contactId));
+function Contact({
+    items: { id, name, number },
+    modalOpen,
+    openModal,
+    afterOpenModal,
+}) {
+    const handlerClick = () => {
+        openModal();
+        afterOpenModal(id);
     };
-
+    const handlerEditContact = () => {
+        modalOpen();
+    };
     return (
         <div className={css.container}>
             <div className={css.wrap}>
@@ -24,7 +27,10 @@ function Contact({ items: { id, name, number } }) {
                     {number}
                 </p>
             </div>
-            <button type="button" onClick={() => onDelete(id)}>
+            <button type="button" onClick={handlerEditContact}>
+                Edit
+            </button>
+            <button type="button" onClick={handlerClick}>
                 Delete
             </button>
         </div>

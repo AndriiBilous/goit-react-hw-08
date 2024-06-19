@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.btn {
+    padding: 10px;
+    border-radius: 20px;
+    border-color: transparent;
+    background-color: #ff5633;
+    color: white;
+}

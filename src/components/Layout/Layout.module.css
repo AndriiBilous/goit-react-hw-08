@@ -1,0 +1,9 @@
+.base {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+}

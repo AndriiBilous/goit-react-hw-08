@@ -1,24 +1,24 @@
-.container{
-    border:1px solid grey ;
+.container {
+    border: 1px solid grey;
     padding: 20px;
     width: 300px;
     display: flex;
-   flex-direction: column;
-   gap: 30px;
+    flex-direction: column;
+    gap: 30px;
 }
-.wrap{
+.wrap {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.btn{
+.btn {
     width: max-content;
     cursor: pointer;
     margin: 0 auto;
     padding: 5px;
 }
-.error{
+.error {
     position: absolute;
     color: red;
     top: 55px;
