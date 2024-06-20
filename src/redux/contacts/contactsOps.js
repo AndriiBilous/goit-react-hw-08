@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// const setAuthHeader = thunk => {
-//     const reduxState = thunk.getState();
-//     axios.defaults.headers.common.Authorization = `Bearer ${reduxState.auth.token}`;
-// };
+const setAuthHeader = thunk => {
+    const reduxState = thunk.getState();
+    axios.defaults.headers.common.Authorization = `Bearer ${reduxState.auth.token}`;
+};
 
 export const fetchContacts = createAsyncThunk(
     'contacts/fetchAll',
@@ -24,7 +24,7 @@ export const addContact = createAsyncThunk(
         try {
             // setAuthHeader(thunkAPI);
             const response = await axios.post(`/contacts`, newContact);
-            console.log(response.data);
+            console.log(response);
 
             return response.data;
         } catch (error) {
@@ -38,6 +38,20 @@ export const deleteContact = createAsyncThunk(
         try {
             // setAuthHeader(thunkAPI);
             const response = await axios.delete(`/contacts/${id}`);
+            patchContact(id);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    },
+);
+
+export const patchContact = createAsyncThunk(
+    'contacts/patchContact',
+    async ({ contactId, value }, thunkAPI) => {
+        try {
+            setAuthHeader(thunkAPI);
+            const response = await axios.patch(`/contacts/${contactId}`, value);
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

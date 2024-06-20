@@ -7,6 +7,7 @@ function Contact({
     modalOpen,
     openModal,
     afterOpenModal,
+    afterEditOpenModal,
 }) {
     const handlerClick = () => {
         openModal();
@@ -14,6 +15,7 @@ function Contact({
     };
     const handlerEditContact = () => {
         modalOpen();
+        afterEditOpenModal(id);
     };
     return (
         <div className={css.container}>

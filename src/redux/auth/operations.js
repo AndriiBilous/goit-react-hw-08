@@ -61,16 +61,3 @@ export const refreshUser = createAsyncThunk(
         },
     },
 );
-// export const patchContact = createAsyncThunk(
-//     'auth/patch',
-//     async (contactId, thunkAPI) => {
-//         try {
-//             const reduxState = thunk.getState();
-//             setAuthHeader(reduxState.auth.token);
-//             const response = await axios.patch(`/contacts/${contactId}`);
-//             return response.data;
-//         } catch (error) {
-//             return thunkAPI.rejectWithValue(error.message);
-//         }
-//     },
-// );

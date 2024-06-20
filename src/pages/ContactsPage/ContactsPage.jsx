@@ -9,7 +9,7 @@ import ContactModal from '../../components/ContactModal/ContactModal';
 import { useState } from 'react';
 import { deleteContact } from '..//../redux/contacts/contactsOps';
 import { fetchContacts } from '..//../redux/contacts/contactsOps';
-// import EditContactModal from '../../components/EditContactModal/EditContactModal';
+import EditModal from '../../components/EditModal/EditModal';
 
 const notify = () => toast.success('You delete a contact');
 
@@ -39,14 +39,19 @@ export default function ContactsPage() {
         dispatch(deleteContact(contactId));
         setIsOpen(false);
     }
+
     //=====================EditModal=================================
-    // const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
-    // function editModalOpen() {
-    //     setModalEditIsOpen(true);
-    // }
-    // function editModalIsClose() {
-    //     setModalEditIsOpen(false);
-    // }
+    const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
+    const [editId, setEditId] = useState('');
+    function editModalOpen() {
+        setModalEditIsOpen(true);
+    }
+    function editModalIsClose() {
+        setModalEditIsOpen(false);
+    }
+    function afterEditOpenModal(id) {
+        setEditId(id);
+    }
 
     return (
         <div className={css.container}>
@@ -57,8 +62,9 @@ export default function ContactsPage() {
             {isError && <p className={css.loading}>Error message!!!</p>}
             <ContactList
                 afterOpenModal={afterOpenModal}
+                afterEditOpenModal={afterEditOpenModal}
                 openModal={openModal}
-                // modalOpen={editModalOpen}
+                modalOpen={editModalOpen}
             />
             {modalIsOpen && (
                 <ContactModal
@@ -67,15 +73,15 @@ export default function ContactsPage() {
                     toDelete={toDelete}
                 />
             )}
+            {modalEditIsOpen && (
+                <EditModal
+                    editModalIsClose={editModalIsClose}
+                    modalEditIsOpen={modalEditIsOpen}
+                    contactId={editId}
+                />
+            )}
 
             <Toaster position="top-center" reverseOrder={false} />
         </div>
     );
 }
-
-// {modalEditIsOpen && (
-//     <EditContactModal
-//         editModalIsClose={editModalIsClose}
-//         modalEditIsOpen={modalEditIsOpen}
-//     />
-// )}
