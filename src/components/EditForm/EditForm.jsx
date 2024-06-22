@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import css from './EditForm.module.css';
 
 const notify = () => toast.success('You edit a contact');
+const notifyError = () => toast.success('Sorry, something went bad ');
 
 let ContactSchema = yup.object().shape({
     name: yup.string().required('Required').min(3, 'To short').max(50),
@@ -20,8 +21,15 @@ export default function EditForm({ editModalIsClose, contactId }) {
     //======================AddContact========================================
     const handelEdit = (value, actions) => {
         if (value !== '') {
-            notify();
-            dispatch(patchContact({ contactId, value }));
+            dispatch(patchContact({ contactId, value }))
+                .unwrap()
+                .then(() => {
+                    notify();
+                })
+                .catch(() => {
+                    notifyError();
+                });
+
             editModalIsClose();
         }
 
@@ -33,19 +41,20 @@ export default function EditForm({ editModalIsClose, contactId }) {
             onSubmit={handelEdit}
             validationSchema={ContactSchema}
         >
-            <Form>
-                <div>
+            <Form className={css.container}>
+                <div className={css.wrap}>
                     <label name="name">Name</label>
-                    <Field type="text" name="name" />
+                    <Field type="text" name="name" className={css.input} />
                     <ErrorMessage
                         className={css.error}
                         name="name"
                         component="span"
                     />
                 </div>
-                <div>
+                <div className={css.wrap}>
                     <label name="number">Number</label>
                     <Field
+                        className={css.input}
                         name="number"
                         type="tel"
                         placeholder="xxx-xx-xx"
@@ -57,7 +66,9 @@ export default function EditForm({ editModalIsClose, contactId }) {
                         component="span"
                     />
                 </div>
-                <button type="submit">Save</button>
+                <button type="submit" className={css.btn}>
+                    Save
+                </button>
                 <Toaster position="top-center" reverseOrder={false} />
             </Form>
         </Formik>

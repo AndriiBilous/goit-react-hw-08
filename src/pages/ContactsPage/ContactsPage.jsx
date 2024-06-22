@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { Bars } from 'react-loader-spinner';
 import ContactForm from '..//../components/ContactForm/ContactForm';
 import SearchBox from '..//../components/SearchBox/SearchBox';
 import ContactList from '..//../components/ContactList/ContactList';
@@ -10,13 +11,15 @@ import { useState } from 'react';
 import { deleteContact } from '..//../redux/contacts/contactsOps';
 import { fetchContacts } from '..//../redux/contacts/contactsOps';
 import EditModal from '../../components/EditModal/EditModal';
+import { selectLoading, selectError } from '..//../redux/contacts/selectors';
 
 const notify = () => toast.success('You delete a contact');
+const notifyError = () => toast.error('No name error.');
 
 export default function ContactsPage() {
     const dispatch = useDispatch();
-    const isLoading = useSelector(state => state.contacts.loading);
-    const isError = useSelector(state => state.contacts.error);
+    const isLoading = useSelector(selectLoading);
+    const isError = useSelector(selectError);
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
@@ -35,14 +38,21 @@ export default function ContactsPage() {
         setIsOpen(false);
     }
     function toDelete() {
-        notify();
-        dispatch(deleteContact(contactId));
+        dispatch(deleteContact(contactId))
+            .unwrap()
+            .then(() => {
+                notify();
+            })
+            .catch(() => {
+                notifyError();
+            });
         setIsOpen(false);
     }
 
     //=====================EditModal=================================
     const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
     const [editId, setEditId] = useState('');
+
     function editModalOpen() {
         setModalEditIsOpen(true);
     }
@@ -56,9 +66,20 @@ export default function ContactsPage() {
     return (
         <div className={css.container}>
             <h1>Phonebook</h1>
+            <h2 className={css.title}>Add a new contact</h2>
             <ContactForm />
             <SearchBox />
-            {isLoading && <p className={css.loading}>Loading message...</p>}
+            {isLoading && (
+                <Bars
+                    height="40"
+                    width="40"
+                    color="blue"
+                    ariaLabel="bars-loading"
+                    wrapperStyle={{}}
+                    wrapperClass={css.loading}
+                    visible={true}
+                />
+            )}
             {isError && <p className={css.loading}>Error message!!!</p>}
             <ContactList
                 afterOpenModal={afterOpenModal}
@@ -80,7 +101,6 @@ export default function ContactsPage() {
                     contactId={editId}
                 />
             )}
-
             <Toaster position="top-center" reverseOrder={false} />
         </div>
     );

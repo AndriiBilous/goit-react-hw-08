@@ -30,15 +30,15 @@ const EditModal = ({ editModalIsClose, modalEditIsOpen, contactId }) => {
             style={customStyles}
             contentLabel="Edit Modal"
         >
-            <div>
+            <div className={css.container}>
                 <button
-                    // className={css.btnImage}
+                    className={css.btnImage}
                     type="button"
                     onClick={editModalIsClose}
                 >
                     <IoMdCloseCircle />
                 </button>
-                <h2>Edit contact</h2>
+                <h2 className={css.title}>Edit contact</h2>
                 <EditForm
                     editModalIsClose={editModalIsClose}
                     contactId={contactId}

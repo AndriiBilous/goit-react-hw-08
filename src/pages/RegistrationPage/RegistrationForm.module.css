@@ -1,0 +1,11 @@
+.title {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.loading {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%);
+}

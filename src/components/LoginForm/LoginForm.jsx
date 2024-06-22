@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 import { logIn } from '../../redux/auth/operations';
 import { MdEmail } from 'react-icons/md';
 import { TbPasswordUser } from 'react-icons/tb';
@@ -10,13 +11,21 @@ let ContactSchema = yup.object().shape({
     email: yup.string().required('Required').min(3, 'To short').max(50),
     password: yup.string().required('Required').min(8, 'To short'),
 });
+const notifyError = () => toast.error('Invalid email or password,  try again');
 
 export default function LoginForm() {
     const dispatch = useDispatch();
     const handlerSubmit = (value, actions) => {
-        dispatch(logIn(value));
-        actions.resetForm();
+        dispatch(logIn(value))
+            .unwrap()
+            .then(() => {
+                actions.resetForm();
+            })
+            .catch(() => {
+                notifyError();
+            });
     };
+
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
@@ -37,7 +46,11 @@ export default function LoginForm() {
                 <div className={css.wrap}>
                     <label name="password">Password</label>
                     <TbPasswordUser className={css.icons} />
-                    <Field className={css.input} type="text" name="password" />
+                    <Field
+                        className={css.input}
+                        type="password"
+                        name="password"
+                    />
                     <ErrorMessage
                         className={css.error}
                         name="password"
@@ -47,6 +60,7 @@ export default function LoginForm() {
                 <button type="submit" className={css.btn}>
                     Log in
                 </button>
+                <Toaster position="top-center" reverseOrder={false} />
             </Form>
         </Formik>
     );

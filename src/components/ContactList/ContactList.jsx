@@ -4,6 +4,7 @@ import css from './ContactList.module.css';
 import { selectFilteredContacts } from '..//../redux/contacts/contactsSlice';
 
 function ContactList({
+    modalOptions,
     modalOpen,
     openModal,
     afterOpenModal,

@@ -29,12 +29,22 @@ function Contact({
                     {number}
                 </p>
             </div>
-            <button type="button" onClick={handlerEditContact}>
-                Edit
-            </button>
-            <button type="button" onClick={handlerClick}>
-                Delete
-            </button>
+            <div className={css.wrapBtn}>
+                <button
+                    type="button"
+                    className={css.btn}
+                    onClick={handlerEditContact}
+                >
+                    Edit
+                </button>
+                <button
+                    type="button"
+                    className={css.btn}
+                    onClick={handlerClick}
+                >
+                    Delete
+                </button>
+            </div>
         </div>
     );
 }

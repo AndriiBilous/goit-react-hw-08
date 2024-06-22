@@ -1,11 +1,11 @@
 .container {
-    border: 1px solid grey;
     padding: 20px;
     width: 300px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
 }
+
 .wrap {
     position: relative;
     display: flex;
@@ -13,13 +13,29 @@
     gap: 5px;
 }
 .btn {
-    width: max-content;
+    width: 200px;
     cursor: pointer;
     margin: 0 auto;
-    padding: 5px;
+    padding: 10px;
+    border: transparent;
+    background-color: rgb(104, 192, 255);
+    &:hover,
+    &:focus {
+        background-color: rgb(77, 180, 254);
+    }
 }
 .error {
     position: absolute;
     color: red;
-    top: 55px;
+    top: 70px;
+}
+.input {
+    border: transparent;
+    border-color: transparent;
+    border-bottom: solid 1px black;
+    height: 40px;
+    padding-left: 20px;
+    overflow: hidden;
+    resize: none;
+    outline: transparent;
 }

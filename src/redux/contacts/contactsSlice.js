@@ -5,8 +5,9 @@ import {
     deleteContact,
     patchContact,
 } from './contactsOps';
-import { selectFilter } from '../filters/filtersSlice';
+import { selectFilter } from '../filters/selectors';
 import { logOut } from '../auth/operations';
+import { selectItem } from './selectors';
 
 const slice = createSlice({
     name: 'contacts',
@@ -57,12 +58,12 @@ const slice = createSlice({
                 state.loading = true;
             })
             .addCase(patchContact.fulfilled, (state, action) => {
-                const index = state.items.findIndex(item => {
-                    item.id === action.payload.id;
+                state.items.findIndex(item => {
+                    if (item.id === action.payload.id) {
+                        item.name = action.payload.name;
+                        item.number = action.payload.number;
+                    }
                 });
-                if (index !== -1) {
-                    state.items[index] = action.payload;
-                }
                 state.loading = false;
             })
             .addCase(patchContact.rejected, state => {
@@ -71,8 +72,7 @@ const slice = createSlice({
             });
     },
 });
-export const selectItem = state => state.contacts.items;
-export const { loading, error } = slice.actions;
+
 export default slice.reducer;
 
 export const selectFilteredContacts = createSelector(

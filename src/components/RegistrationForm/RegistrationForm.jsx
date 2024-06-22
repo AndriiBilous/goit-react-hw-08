@@ -10,10 +10,17 @@ import css from './RegistrationForm.module.css';
 
 const notify = () => toast.error('Before submit fill up the field, please.');
 
+const notifyError = () => toast.error('Invalid email, try again');
+
 let ContactSchema = yup.object().shape({
     name: yup.string().required('Required').min(3, 'To short').max(50),
-    email: yup.string().required('Required').min(3).max(50),
-    password: yup.string().required('Required').min(3).max(50),
+    email: yup
+        .string()
+        .email('Must be a valid email')
+        .required('Required')
+        .min(8)
+        .max(50),
+    password: yup.string().required('Required').min(8).max(50),
 });
 
 export default function RegistrationForm() {
@@ -23,8 +30,15 @@ export default function RegistrationForm() {
             notify();
             return;
         }
-        dispatch(register(value));
-        actions.resetForm();
+
+        dispatch(register(value))
+            .unwrap()
+            .then(() => {
+                actions.resetForm();
+            })
+            .catch(() => {
+                notifyError();
+            });
     };
     return (
         <Formik

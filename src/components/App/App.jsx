@@ -25,9 +25,9 @@ function App() {
         dispatch(refreshUser());
     }, [dispatch]);
 
-    // if (isRefreshing) {
-    //     return null;
-    // }
+    if (isRefreshing) {
+        return null;
+    }
     return (
         <Layout>
             <Suspense fallback={null}>

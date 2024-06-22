@@ -1,8 +1,9 @@
 .container {
-    background-color: #ffce33;
-    height: 150px;
+    background-color: white;
+    height: 170px;
     padding: 15px;
     position: relative;
+    border-radius: 40px;
 }
 .btnImage {
     position: absolute;
@@ -12,6 +13,7 @@
 }
 
 .title {
+    text-align: center;
     margin-top: 30px;
     margin-bottom: 20px;
 }
@@ -21,6 +23,14 @@
     gap: 20px;
 }
 .btn {
+    background-color: rgb(104, 192, 255);
     width: 100px;
+    cursor: pointer;
+    margin: 0 auto;
     padding: 10px;
+    border: transparent;
+    &:hover,
+    &:focus {
+        background-color: rgb(77, 180, 254);
+    }
 }

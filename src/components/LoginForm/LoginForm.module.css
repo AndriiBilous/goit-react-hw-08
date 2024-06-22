@@ -2,7 +2,7 @@
     width: 300px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 100px;
 }
 .wrap {
     position: relative;
@@ -11,9 +11,16 @@
     gap: 10px;
 }
 .btn {
+    background-color: rgb(104, 192, 255);
+    width: 200px;
+    cursor: pointer;
+    margin: 0 auto;
     padding: 10px;
-    border-radius: 20px;
-    background-color: gold;
+    border: transparent;
+    &:hover,
+    &:focus {
+        background-color: rgb(77, 180, 254);
+    }
 }
 .icons {
     position: absolute;
@@ -21,8 +28,14 @@
     left: 10px;
 }
 .input {
-    padding: 10px;
-    padding-left: 30px;
+    border: transparent;
+    border-color: transparent;
+    border-bottom: solid 1px black;
+    height: 40px;
+    padding-left: 40px;
+    overflow: hidden;
+    resize: none;
+    outline: transparent;
 }
 .error {
     position: absolute;

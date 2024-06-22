@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import css from './ContactForm.module.css';
 import { addContact } from '..//../redux/contacts/contactsOps';
 const notify = () => toast.success('You add a new contact');
+const notifyError = () => toast.error('No name error');
 
 let ContactSchema = yup.object().shape({
     name: yup.string().required('Required').min(3, 'To short').max(50),
@@ -18,8 +19,14 @@ function ContactForm() {
     //======================AddContact========================================
     const handelAdd = (value, actions) => {
         if (value !== '') {
-            notify();
-            dispatch(addContact(value));
+            dispatch(addContact(value))
+                .unwrap()
+                .then(() => {
+                    notify();
+                })
+                .catch(() => {
+                    notifyError();
+                });
         }
         actions.resetForm();
     };
@@ -32,7 +39,7 @@ function ContactForm() {
             <Form className={css.container}>
                 <div className={css.wrap}>
                     <label name="name">Name</label>
-                    <Field type="text" name="name" />
+                    <Field type="text" name="name" className={css.input} />
                     <ErrorMessage
                         className={css.error}
                         name="name"
@@ -42,6 +49,7 @@ function ContactForm() {
                 <div className={css.wrap}>
                     <label name="number">Number</label>
                     <Field
+                        className={css.input}
                         type="tel"
                         name="number"
                         placeholder="xxx-xx-xx"

@@ -1,18 +1,33 @@
-.container{
+.container {
     border: 1px solid grey;
     padding: 10px;
-    width: 250px;
+
     display: flex;
     justify-content: space-between;
-    
 }
-.wrap{
+.wrap {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.text{
+.text {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+.wrapBtn {
+    display: flex;
+    gap: 20px;
+}
+.btn {
+    background-color: rgb(104, 192, 255);
+    width: 100px;
+    cursor: pointer;
+    margin: 0 auto;
+    padding: 10px;
+    border: transparent;
+    &:hover,
+    &:focus {
+        background-color: rgb(77, 180, 254);
+    }
 }
