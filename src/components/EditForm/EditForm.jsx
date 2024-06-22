@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useDispatch } from 'react-redux';
-import { patchContact } from '../../redux/contacts/contactsOps';
+import { patchContact } from '../../redux/contacts/operations';
 import toast, { Toaster } from 'react-hot-toast';
 import css from './EditForm.module.css';
 

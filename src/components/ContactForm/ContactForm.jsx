@@ -3,7 +3,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import css from './ContactForm.module.css';
-import { addContact } from '..//../redux/contacts/contactsOps';
+import { addContact } from '..//../redux/contacts/operations';
 const notify = () => toast.success('You add a new contact');
 const notifyError = () => toast.error('No name error');
 

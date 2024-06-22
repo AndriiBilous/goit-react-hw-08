@@ -8,8 +8,8 @@ import ContactList from '..//../components/ContactList/ContactList';
 import css from './ContactsPage.module.css';
 import ContactModal from '../../components/ContactModal/ContactModal';
 import { useState } from 'react';
-import { deleteContact } from '..//../redux/contacts/contactsOps';
-import { fetchContacts } from '..//../redux/contacts/contactsOps';
+import { deleteContact } from '..//../redux/contacts/operations';
+import { fetchContacts } from '..//../redux/contacts/operations';
 import EditModal from '../../components/EditModal/EditModal';
 import { selectLoading, selectError } from '..//../redux/contacts/selectors';
 
